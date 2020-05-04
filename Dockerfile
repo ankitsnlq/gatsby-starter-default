@@ -9,8 +9,8 @@ COPY --from=npmpackages /app /app
 COPY . .
 RUN npm run build
 
-FROM nginx:1.17.10-alpine
-RUN rm -r /usr/share/nginx/html/
-COPY --from=builder /app/public/ /usr/share/nginx/html/
+FROM caddy:2.0.0
+RUN rm -f /usr/share/caddy/index.html
+COPY --from=builder /app/public/ /usr/share/caddy/
 
 EXPOSE 80
