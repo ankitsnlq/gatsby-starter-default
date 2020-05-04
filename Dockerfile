@@ -9,7 +9,7 @@ COPY --from=npmpackages /app /app
 COPY . .
 RUN npm run build
 
-FROM caddy:2.0.0
+FROM caddy:alpine
 RUN rm -f /usr/share/caddy/index.html
 COPY --from=builder /app/public/ /usr/share/caddy/
 
